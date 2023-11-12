@@ -1,15 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './contactsOperations';
 
-const contactsInitialState = {
-  contacts: [],
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  editContatc,
+} from './contactsOperations.js';
+
+const initialState = {
+  items: [],
   isLoading: false,
   error: null,
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  contactsInitialState,
+  initialState,
   reducers: {},
   extraReducers: builder => {
     builder
@@ -23,7 +29,7 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts = action.payload;
+        state.items = action.payload;
       })
       .addCase(addContact.pending, state => {
         state.isLoading = true;
@@ -35,7 +41,7 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts.push(action.payload);
+        state.items.push(action.payload);
       })
       .addCase(deleteContact.pending, state => {
         state.isLoading = true;
@@ -47,8 +53,21 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts = state.contacts.filter(
-          contact => contact.id !== action.payload.id
+        state.items = state.items.filter(item => item.id !== action.payload.id);
+      })
+      .addCase(editContatc.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(editContatc.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(editContatc.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const updatedContact = action.payload;
+        state.items = state.items.map(item =>
+          item.id === updatedContact.id ? updatedContact : item
         );
       });
   },
@@ -56,7 +75,6 @@ const contactsSlice = createSlice({
 
 const { reducer: contactsReducer } = contactsSlice;
 export default contactsReducer;
-
 // const contactsInitialState = {
 //   contacts: [],
 //   isLoading: false,
