@@ -1,17 +1,28 @@
-import { useAuth } from '../hooks';
-import { Links } from './Navigation.styled';
+import { useAuth } from '../hooks/useAuth';
+import { FaPhoneSquare } from 'react-icons/fa';
+import { Nav, LogoLink, HomeLink, ContactsLink } from './Navigation.styled';
+import { useLocation } from 'react-router';
 
-const Navigation = () => {
+export const Navigation = () => {
   const { isLoggedIn } = useAuth();
-
+  const location = useLocation();
   return (
-    <nav>
-      <Links to="/" end>
-        Home
-      </Links>
-      {isLoggedIn && <Links to="/contacts">Phonebook</Links>}
-    </nav>
+    <Nav>
+      {location.pathname === '/' ? (
+        <LogoLink>
+          <FaPhoneSquare
+            style={{
+              color: 'rgb(213 169 220)',
+              width: '24px',
+              height: '24px',
+            }}
+          />
+          PhoneBook
+        </LogoLink>
+      ) : (
+        <HomeLink to="/">Home</HomeLink>
+      )}
+      {isLoggedIn && <ContactsLink to="/contacts">Contacts</ContactsLink>}
+    </Nav>
   );
 };
-
-export default Navigation;

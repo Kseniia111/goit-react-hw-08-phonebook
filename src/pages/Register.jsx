@@ -1,16 +1,8 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useAuth } from '../components/hooks';
+import { Navigate } from 'react-router-dom';
 
-import RegisterForm from '../components/RegisterForm/RegisterForm';
+export const RestrictedRoute = ({ component: Component, redirectTo = '/' }) => {
+  const { isLoggedIn } = useAuth();
 
-export default function Register() {
-  return (
-    <HelmetProvider>
-      <div>
-        <Helmet>
-          <title>Registration</title>
-        </Helmet>
-        <RegisterForm />
-      </div>
-    </HelmetProvider>
-  );
-}
+  return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
+};
