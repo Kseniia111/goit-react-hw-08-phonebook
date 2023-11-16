@@ -1,28 +1,57 @@
-import { InputFilter, LabelFilter } from './Filter.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectFilter } from 'redux/Selectors';
-import { setStatusFilter } from 'redux/FilterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { FcSearch } from 'react-icons/fc';
+import { selectContacts, selectFilter } from 'redux/Selectors';
+import { setFilter } from 'redux/FilterSlice';
+import { InputStyles, Title } from './Filter.styled';
 
-export const Filter = () => {
+function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
 
-  const onFilter = e => {
-    dispatch(setStatusFilter(e.target.value));
+  const handleFilterChange = event => {
+    dispatch(setFilter(event.target.value.trim()));
   };
 
-  return (
-    <LabelFilter>
-      Find contacts by name
-      <InputFilter
-        type="text"
-        placeholder="Enter name of contact"
-        value={filter}
-        onChange={onFilter}
-      ></InputFilter>
-    </LabelFilter>
+  return useSelector(selectContacts).length < 1 ? (
+    <Title>Add your first contact</Title>
+  ) : (
+    <InputStyles
+      type="text"
+      name="filter"
+      placeholder="Search by name"
+      value={filter}
+      onChange={handleFilterChange}
+      prefix={<FcSearch />}
+    />
   );
-};
+}
+
+export default Filter;
+// import { InputFilter, LabelFilter } from './Filter.styled';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { selectFilter } from 'redux/Selectors';
+// import { setFilter } from 'redux/FilterSlice';
+
+// export const Filter = () => {
+//   const dispatch = useDispatch();
+//   const filter = useSelector(selectFilter);
+
+//   const onFilter = e => {
+//     dispatch(setFilter(e.target.value));
+//   };
+
+//   return (
+//     <LabelFilter>
+//       Find contacts by name
+//       <InputFilter
+//         type="text"
+//         placeholder="Enter name of contact"
+//         value={filter}
+//         onChange={onFilter}
+//       ></InputFilter>
+//     </LabelFilter>
+//   );
+// };
 
 // import { useDispatch } from 'react-redux';
 // import { filterContact } from 'redux/FilterSlice';

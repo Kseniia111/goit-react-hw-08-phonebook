@@ -36,7 +36,7 @@ export const Input = styled.input`
   padding-left: 12px;
 `;
 
-export const SubmitButton = styled.button`
+export const Button = styled.button`
   width: 360px;
   height: 36px;
   color: #fff;

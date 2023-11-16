@@ -1,26 +1,64 @@
 import styled from 'styled-components';
-export const ContactItemLi = styled.li`
+
+export const ContactItems = styled.li`
   display: flex;
-  gap: 16px;
-  // justify-content: space-around;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #f5f6f7;
+  padding-left: 10px;
+  border-radius: 7px;
 `;
 
-export const DeleteBtn = styled.button`
-  width: 100px;
-  color: #fff;
-  background: #000;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
+export const ContactName = styled.span`
+  margin-right: 10px;
+`;
 
-  &:hover {
-    color: #fff;
-    background-color: #222;
-    box-shadow: inset 0px 2px 4px rgba(255, 0, 33, 0.5),
-      inset 0px 4px 8px rgba(255, 0, 33, 0.5),
-      inset 0px 8px 16px rgba(255, 0, 33, 0.5);
-    transition: 0.2s;
-    transform: translateY(2px);
+export const ContactNumber = styled.a`
+  cursor: pointer;
+  color: #1677ff;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+export const Btn = styled.button`
+  @media only screen and (max-width: 600px) {
+    margin-right: 10px;
+  }
+  > svg {
+    width: 30px;
+    height: 22px;
+    fill: #f50505;
+  }
+  padding: 3px 10px 0 10px;
+  margin-left: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid;
+  :hover {
+    background-color: #1677ff;
+    > svg {
+      fill: #fff;
+    }
+  }
+`;
+
+export const BtnEdit = styled.button`
+  > svg {
+    width: 30px;
+    height: 22px;
+    fill: #051df5;
+  }
+  padding: 3px 10px 0 10px;
+  margin-left: 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid;
+  :hover {
+    background-color: #1677ff;
+    > svg {
+      fill: #fff;
+    }
   }
 `;
