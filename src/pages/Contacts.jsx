@@ -1,26 +1,70 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'react-hot-toast';
+import ContactForm from 'components/ContactForm/ContactForm';
+import { ContactList } from 'components/ContactList/ContactList';
+import Filter from 'components/Filter/Filter';
+import { useFilter } from '../components/hooks/useFilter';
+import { useContacts } from '../components/hooks/useContacts';
+import { WrapperContacts, Container, TextStyled } from './Contacts.styled';
 
-import ContactForm from '../components/ContactForm/ContactForm';
-import ContactList from '../components/ContactList/ContactList';
-import Filter from '../components/Filter/Filter';
+const ContactsPage = () => {
+  const [filter, onSetFilter] = useFilter();
+  const [contacts, onAddContact, onDeleteContact] = useContacts();
 
-function Contacts() {
+  const empty = () => contacts.length > 0;
+
   return (
-    <>
-      <HelmetProvider>
-        <Helmet>
-          <title>Phonebook📱</title>
-        </Helmet>
-        <ContactForm />
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </HelmetProvider>
-    </>
-  );
-}
+    <Container>
+      <WrapperContacts>
+        <h2>Phonebook</h2>
+        <ContactForm onData={onAddContact} />
+      </WrapperContacts>
 
-export default Contacts;
+      <WrapperContacts>
+        <h2>Contacts</h2>
+        <Filter value={filter} onChangeFilter={onSetFilter} />
+        {empty() ? (
+          <>
+            <ContactList
+              contacts={contacts}
+              onDeleteContact={onDeleteContact}
+            />
+          </>
+        ) : (
+          <TextStyled>
+            Phonebook is empty! <br /> Add your contacts.
+          </TextStyled>
+        )}
+        <Toaster position="top-center" reverseOrder={false} />
+      </WrapperContacts>
+    </Container>
+  );
+};
+
+export default ContactsPage;
+
+// import { Helmet, HelmetProvider } from 'react-helmet-async';
+
+// import ContactForm from '../components/ContactForm/ContactForm';
+// import ContactList from '../components/ContactList/ContactList';
+// import Filter from '../components/Filter/Filter';
+
+// function Contacts() {
+//   return (
+//     <>
+//       <HelmetProvider>
+//         <Helmet>
+//           <title>Phonebook📱</title>
+//         </Helmet>
+//         <ContactForm />
+//         <h2>Contacts</h2>
+//         <Filter />
+//         <ContactList />
+//       </HelmetProvider>
+//     </>
+//   );
+// }
+
+// export default Contacts;
 // import ContactForm from '../components/ContactForm/ContactForm';
 // import ContactsList from '../components/ContactList/ContactList';
 // import Filter from '../components/Filter/Filter';

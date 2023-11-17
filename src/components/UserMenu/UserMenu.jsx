@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/auth-operations';
-import { useAuth } from '../hooks/useAuth';
+import { getUser } from 'redux/auth/auth-selectors';
 import { Wrapper, LogOutBtn } from './UserMenu.styled';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const { user } = useAuth();
+  const { user } = useSelector(getUser);
 
   return (
     <Wrapper>

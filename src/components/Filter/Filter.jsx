@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FcSearch } from 'react-icons/fc';
 import { selectContacts, selectFilter } from 'redux/Selectors';
-import { setFilter } from 'redux/FilterSlice';
+import { setStatusFilter } from 'redux/FilterSlice';
 import { InputStyles, Title } from './Filter.styled';
 
 function Filter() {
@@ -9,7 +9,7 @@ function Filter() {
   const filter = useSelector(selectFilter);
 
   const handleFilterChange = event => {
-    dispatch(setFilter(event.target.value.trim()));
+    dispatch(setStatusFilter(event.target.value.trim()));
   };
 
   return useSelector(selectContacts).length < 1 ? (
