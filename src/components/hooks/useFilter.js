@@ -1,4 +1,4 @@
-import { setStatusFilter } from 'redux/FilterSlice';
+import { setFilter } from 'redux/FilterSlice';
 import { selectFilter } from 'redux/Selectors';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,7 +7,7 @@ export const useFilter = () => {
   const dispatch = useDispatch();
 
   const onSetFilter = ({ target }) => {
-    dispatch(setStatusFilter(target.value));
+    dispatch(setFilter(target.value));
   };
 
   return [filter, onSetFilter];

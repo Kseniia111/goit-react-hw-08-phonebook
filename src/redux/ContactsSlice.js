@@ -55,12 +55,7 @@ const contactsSlice = createSlice({
 export default contactsSlice.reducer;
 // import { createSlice } from '@reduxjs/toolkit';
 
-// import {
-//   fetchContacts,
-//   addContact,
-//   deleteContact,
-//   editContact,
-// } from './contactsOperations';
+// import { fetchContacts, addContact, removeContact } from './contactsOperations';
 
 // const initialState = {
 //   items: [],
@@ -98,33 +93,33 @@ export default contactsSlice.reducer;
 //         state.error = null;
 //         state.items.push(action.payload);
 //       })
-//       .addCase(deleteContact.pending, state => {
+//       .addCase(removeContact.pending, state => {
 //         state.isLoading = true;
 //       })
-//       .addCase(deleteContact.rejected, (state, action) => {
+//       .addCase(removeContact.rejected, (state, action) => {
 //         state.isLoading = false;
 //         state.error = action.error.message;
 //       })
-//       .addCase(deleteContact.fulfilled, (state, action) => {
+//       .addCase(removeContact.fulfilled, (state, action) => {
 //         state.isLoading = false;
 //         state.error = null;
 //         state.items = state.items.filter(item => item.id !== action.payload.id);
-//       })
-//       .addCase(editContact.pending, state => {
-//         state.isLoading = true;
-//       })
-//       .addCase(editContact.rejected, (state, action) => {
-//         state.isLoading = false;
-//         state.error = action.error.message;
-//       })
-//       .addCase(editContact.fulfilled, (state, action) => {
-//         state.isLoading = false;
-//         state.error = null;
-//         const updatedContact = action.payload;
-//         state.items = state.items.map(item =>
-//           item.id === updatedContact.id ? updatedContact : item
-//         );
 //       });
+//     .addCase(editContact.pending, state => {
+//       state.isLoading = true;
+//     })
+//     .addCase(editContact.rejected, (state, action) => {
+//       state.isLoading = false;
+//       state.error = action.error.message;
+//     })
+//     .addCase(editContact.fulfilled, (state, action) => {
+//       state.isLoading = false;
+//       state.error = null;
+//       const updatedContact = action.payload;
+//       state.items = state.items.map(item =>
+//         item.id === updatedContact.id ? updatedContact : item
+//       );
+//     });
 //   },
 // });
 

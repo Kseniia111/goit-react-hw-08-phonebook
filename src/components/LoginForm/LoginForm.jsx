@@ -1,125 +1,78 @@
-import { useDispatch } from 'react-redux';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import { TextField, Box, Container, Typography } from '@mui/material';
 
-import { logIn } from 'redux/auth/auth-operations';
+import { useState } from 'react';
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
-
-  const onFinish = values => {
-    dispatch(logIn(values));
+export function LoginForm({ onData }) {
+  const initialState = {
+    email: '',
+    password: '',
   };
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   const { email, password } = e.target.elements;
-  //   if (email.value.trim() === '' || password.value.trim() === '') {
-  //     return toast.error('Please fill in all fields');
-  //   }
-  //   dispatch(logIn({ email: email.value, password: password.value }));
-  //   e.target.reset();
-  // };
+
+  const [state, setState] = useState({ ...initialState });
+  const { email, password } = state;
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    onData({ ...state });
+    setState({ ...initialState });
+  };
 
   return (
-    <Form
-      name="normal_login"
-      className="login-form"
-      initialValues={{
-        remember: false,
-      }}
-      onFinish={onFinish}
-    >
-      <Form.Item
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Email!',
-          },
-        ]}
+    <Container component="div" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          padding: '20px',
+          boxShadow: ' rgb(33 33 33) 0px 2px 10px 1px',
+        }}
       >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Email"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Password!',
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-      </Form.Item>
+        <Typography variant="h4">Log In</Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            autoFocus
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            type="email"
+            value={email}
+            variant="standard"
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            variant="standard"
+            onChange={handleChange}
+          />
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
-        </Button>
-      </Form.Item>
-    </Form>
-
-    // <Form onSubmit={handleSubmit} autoComplete="off">
-    //   <Text>Email</Text>
-    //   <Input type="email" name="email" placeholder="Enter email" />
-    //   <Text>Password</Text>
-    //   <Input type="password" name="password" placeholder="Enter password" />
-    //   <Button type="submit">Log In</Button>
-    // </Form>
+          <Button type="submit" variant="contained" size="small">
+            Log In
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
-};
-
-export default LoginForm;
-// import { useDispatch } from 'react-redux';
-// import { logIn } from 'redux/auth/auth-operations';
-// import {
-//   LogInForm,
-//   LoginLabel,
-//   LoginInput,
-//   LoginSubmitButton,
-//   LoginContainer,
-// } from './LoginForm.styled';
-
-// export const LoginForm = () => {
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = e => {
-//     e.preventDefault();
-//     const form = e.currentTarget;
-//     dispatch(
-//       logIn({
-//         email: form.elements.email.value,
-//         password: form.elements.password.value,
-//       })
-//     );
-//     form.reset();
-//   };
-
-//   return (
-//     <LoginContainer>
-//       <LogInForm onSubmit={handleSubmit} autoComplete="off">
-//         <LoginLabel>
-//           Email
-//           <LoginInput type="email" name="email" />
-//         </LoginLabel>
-//         <LoginLabel>
-//           Password
-//           <LoginInput type="password" name="password" />
-//         </LoginLabel>
-//         <LoginSubmitButton type="submit">Log In</LoginSubmitButton>
-//       </LogInForm>
-//     </LoginContainer>
-//   );
-// };
+}

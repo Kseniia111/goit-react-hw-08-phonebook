@@ -1,24 +1,28 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useDispatch } from 'react-redux';
+import { RegisterForm } from 'components/RegisterForm/RegisterForm';
+import { signUp } from 'redux/auth/auth-operations';
+import { useSelector } from 'react-redux';
+import { getAuthError } from 'redux/auth/auth-selectors';
 
-import RegisterForm from '../components/RegisterForm/RegisterForm';
+import toast from 'react-hot-toast';
 
-export default function Register() {
+const RegisterPage = () => {
+  const dispatch = useDispatch();
+  const { status } = useSelector(getAuthError);
+
+  const onRegister = data => {
+    console.log(data);
+    if (status === 400) {
+      toast.success('You are already authorized');
+    }
+    dispatch(signUp(data));
+  };
+
   return (
-    <HelmetProvider>
-      <div>
-        <Helmet>
-          <title>Registration</title>
-        </Helmet>
-        <RegisterForm />
-      </div>
-    </HelmetProvider>
+    <>
+      <RegisterForm onData={onRegister} />
+    </>
   );
-}
-// import { useAuth } from '../components/hooks';
-// import { Navigate } from 'react-router-dom';
+};
 
-// export const RestrictedRoute = ({ component: Component, redirectTo = '/' }) => {
-//   const { isLoggedIn } = useAuth();
-
-//   return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
-// };
+export default RegisterPage;

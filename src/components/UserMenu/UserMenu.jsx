@@ -1,18 +1,21 @@
+import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/auth-operations';
 import { getUser } from 'redux/auth/auth-selectors';
-import { Wrapper, LogOutBtn } from './UserMenu.styled';
+import { UserNav, StyledName } from './UserMenu.styled';
 
 export const UserMenu = () => {
+  const { name } = useSelector(getUser);
   const dispatch = useDispatch();
-  const { user } = useSelector(getUser);
+
+  const onLogOut = () => dispatch(logOut());
 
   return (
-    <Wrapper>
-      <p>Welcome, {user.name}</p>
-      <LogOutBtn type="button" onClick={() => dispatch(logOut())}>
-        LogOut
-      </LogOutBtn>
-    </Wrapper>
+    <UserNav>
+      <StyledName>Hello, {name} </StyledName>
+      <Button variant="contained" size="small" onClick={onLogOut} type="button">
+        Log Out
+      </Button>
+    </UserNav>
   );
 };
