@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { register } from 'redux/auth/auth-operations';
+import { signUp } from 'redux/auth/auth-operations';
 import { Button, Form, Input } from 'antd';
 
 const RegisterForm = () => {
@@ -12,7 +12,7 @@ const RegisterForm = () => {
     const { name, email, password, confirm } = values;
 
     if (password === confirm) {
-      dispatch(register({ name, email, password }));
+      dispatch(signUp({ name, email, password }));
       !isLoading && !error && form.resetFields();
     }
   };
