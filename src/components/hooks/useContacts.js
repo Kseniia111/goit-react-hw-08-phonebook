@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilteredContacts } from 'redux/Selectors';
+import { getVisibleFilter } from 'redux/Selectors';
 import {
   addContact,
   fetchContacts,
@@ -9,7 +9,7 @@ import { toast } from 'react-hot-toast';
 import { useEffect } from 'react';
 
 export const useContacts = () => {
-  const contacts = useSelector(selectFilteredContacts);
+  const contacts = useSelector(getVisibleFilter);
   const dispatch = useDispatch();
 
   useEffect(() => {

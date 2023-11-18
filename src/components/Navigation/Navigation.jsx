@@ -1,7 +1,7 @@
 import { NavStyled } from './Navigation.styled';
 import { useSelector } from 'react-redux';
 import { isAuth } from 'redux/auth/auth-selectors';
-import AuthNav from 'components/AuthNav/AuthNav';
+import { AuthNav } from 'components/AuthNav/AuthNav';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { NavContainer } from './Navigation.styled';
 
