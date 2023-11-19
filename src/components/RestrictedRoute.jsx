@@ -1,16 +1,11 @@
+import { useAuth } from 'hook/useAuth';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-//import { isAuth } from 'redux/auth/auth-selectors';
-import { useAuth } from 'hook';
-export const RestrictedRoute = ({ children }) => {
-  const isLogin = useSelector(useAuth);
 
-  if (isLogin) {
-    return <Navigate to="/contacts" />;
-  }
-  return children;
-};
-// import { Navigate } from 'react-router-dom';
+export const RestrictedRoute = ({ component: Component, redirectTo = '/' }) => {
+  const { isLoggedIn } = useAuth();
+
+  return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
+}; // import { Navigate } from 'react-router-dom';
 
 // import { useAuth } from './hooks';
 

@@ -1,3 +1,13 @@
+// import { RegisterForm } from 'components/RegisterForm/RegisterForm';
+// //import { Section } from 'components/Section/Section';
+
+// export default function Register() {
+//   return (
+//     <>
+//       <RegisterForm />
+//     </>
+//   );
+// }
 import { useDispatch } from 'react-redux';
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
 import { register } from 'redux/auth/auth-operations';
@@ -6,7 +16,7 @@ import { getAuthError } from 'redux/auth/auth-selectors';
 
 import toast from 'react-hot-toast';
 
-const RegisterPage = () => {
+const Register = () => {
   const dispatch = useDispatch();
   const { status } = useSelector(getAuthError);
 
@@ -24,5 +34,4 @@ const RegisterPage = () => {
     </>
   );
 };
-
-export default RegisterPage;
+export default Register;

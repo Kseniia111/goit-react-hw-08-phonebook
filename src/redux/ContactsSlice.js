@@ -1,86 +1,140 @@
-import { createSlice } from '@reduxjs/toolkit';
-import toast from 'react-hot-toast';
-import {
-  addNewContact,
-  editContact,
-  getAllContactsThunk,
-  removeContact,
-} from './contactsOperations';
+import { addContact, deleteContact, fetchContacts } from './contactsOperations';
+const { createSlice } = require('@reduxjs/toolkit');
 
-const handlePending = state => {
-  state.isLoading = true;
-};
-
-const handleFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.items = action.payload;
-  state.error = null;
-};
-
-const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
-};
-
-const handlePostFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.items.push(action.payload);
-  state.error = null;
-};
-
-const handleDeleteFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.error = null;
-  const index = state.items.findIndex(
-    contact => contact.id === action.payload.id
-  );
-  state.items.splice(index, 1);
-
-  toast.success(<div>Contact deleted!</div>, {
-    duration: 4000,
-    icon: '✅',
-  });
-};
-
-const handleEditFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.error = null;
-
-  const updatedContact = state.items.findIndex(
-    contact => contact.id === action.payload.id
-  );
-
-  if (updatedContact !== -1) {
-    state.items[updatedContact] = action.payload;
-  }
-};
-
-const slice = createSlice({
+const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     items: [],
     isLoading: false,
     error: null,
-    currentContact: null,
   },
   extraReducers: builder => {
     builder
-      .addCase(getAllContactsThunk.pending, handlePending)
-      .addCase(getAllContactsThunk.fulfilled, handleFulfilled)
-      .addCase(getAllContactsThunk.rejected, handleRejected)
-      .addCase(addNewContact.pending, handlePending)
-      .addCase(addNewContact.fulfilled, handlePostFulfilled)
-      .addCase(addNewContact.rejected, handleRejected)
-      .addCase(removeContact.pending, handlePending)
-      .addCase(removeContact.fulfilled, handleDeleteFulfilled)
-      .addCase(removeContact.rejected, handleRejected)
-      .addCase(editContact.pending, handlePending)
-      .addCase(editContact.fulfilled, handleEditFulfilled)
-      .addCase(editContact.rejected, handleRejected);
+      .addCase(fetchContacts.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+
+      .addCase(addContact.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = [...state.items, action.payload];
+      })
+      .addCase(addContact.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(deleteContact.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = state.items.filter(el => el.id !== action.payload.id);
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.error = action.payload;
+      });
   },
 });
 
-export const contactsReducer = slice.reducer;
+export const contactsReducer = contactsSlice.reducer;
+
+// import { createSlice } from '@reduxjs/toolkit';
+// import toast from 'react-hot-toast';
+// import {
+//   addNewContact,
+//   editContact,
+//   getAllContactsThunk,
+//   removeContact,
+// } from './contactsOperations';
+
+// const handlePending = state => {
+//   state.isLoading = true;
+// };
+
+// const handleFulfilled = (state, action) => {
+//   state.isLoading = false;
+//   state.items = action.payload;
+//   state.error = null;
+// };
+
+// const handleRejected = (state, action) => {
+//   state.isLoading = false;
+//   state.error = action.payload;
+// };
+
+// const handlePostFulfilled = (state, action) => {
+//   state.isLoading = false;
+//   state.items.push(action.payload);
+//   state.error = null;
+// };
+
+// const handleDeleteFulfilled = (state, action) => {
+//   state.isLoading = false;
+//   state.error = null;
+//   const index = state.items.findIndex(
+//     contact => contact.id === action.payload.id
+//   );
+//   state.items.splice(index, 1);
+
+//   toast.success(<div>Contact deleted!</div>, {
+//     duration: 4000,
+//     icon: '✅',
+//   });
+// };
+
+// const handleEditFulfilled = (state, action) => {
+//   state.isLoading = false;
+//   state.error = null;
+
+//   const updatedContact = state.items.findIndex(
+//     contact => contact.id === action.payload.id
+//   );
+
+//   if (updatedContact !== -1) {
+//     state.items[updatedContact] = action.payload;
+//   }
+// };
+
+// const slice = createSlice({
+//   name: 'contacts',
+//   initialState: {
+//     items: [],
+//     isLoading: false,
+//     error: null,
+//     currentContact: null,
+//   },
+//   extraReducers: builder => {
+//     builder
+//       .addCase(getAllContactsThunk.pending, handlePending)
+//       .addCase(getAllContactsThunk.fulfilled, handleFulfilled)
+//       .addCase(getAllContactsThunk.rejected, handleRejected)
+//       .addCase(addNewContact.pending, handlePending)
+//       .addCase(addNewContact.fulfilled, handlePostFulfilled)
+//       .addCase(addNewContact.rejected, handleRejected)
+//       .addCase(removeContact.pending, handlePending)
+//       .addCase(removeContact.fulfilled, handleDeleteFulfilled)
+//       .addCase(removeContact.rejected, handleRejected)
+//       .addCase(editContact.pending, handlePending)
+//       .addCase(editContact.fulfilled, handleEditFulfilled)
+//       .addCase(editContact.rejected, handleRejected);
+//   },
+// });
+
+// export const contactsReducer = slice.reducer;
 // import { createSlice } from '@reduxjs/toolkit';
 // import { fetchContacts, addContact, removeContact } from './contactsOperations';
 // const initialState = {
