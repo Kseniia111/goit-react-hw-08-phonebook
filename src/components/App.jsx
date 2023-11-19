@@ -5,8 +5,9 @@ import { Layout } from './Header/Header';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { useDispatch } from 'react-redux';
-import { current } from 'redux/auth/auth-operations';
+//import { current } from 'redux/auth/auth-operations';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { refreshUser } from 'redux/auth/auth-operations';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const ContactsPage = lazy(() => import('../pages/Contacts'));
@@ -17,7 +18,7 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(current());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (

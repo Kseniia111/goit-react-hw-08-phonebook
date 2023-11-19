@@ -1,9 +1,10 @@
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isAuth } from 'redux/auth/auth-selectors';
+//import { isAuth } from 'redux/auth/auth-selectors';
+import { useAuth } from 'hook';
 
 export const PrivateRoute = ({ children }) => {
-  const isLogin = useSelector(isAuth);
+  const isLogin = useSelector(useAuth);
 
   if (!isLogin) {
     return <Navigate to="/login" />;
