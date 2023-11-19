@@ -43,7 +43,6 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-
 // import { createSlice } from '@reduxjs/toolkit';
 // import { signUp, logIn, logOut, current } from './auth-operations';
 

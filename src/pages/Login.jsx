@@ -1,37 +1,29 @@
-import { useDispatch } from 'react-redux';
 import { LoginForm } from 'components/LoginForm/LoginForm';
-import { logIn } from 'redux/auth/auth-operations';
+import { Section } from 'components/Section/Section';
 
-const LoginPage = () => {
-  const dispatch = useDispatch();
-
-  const onLogin = data => {
-    dispatch(logIn(data));
-  };
-
+export default function Login() {
   return (
-    <>
-      <LoginForm onData={onLogin} />
-    </>
+    <Section>
+      <LoginForm />
+    </Section>
   );
-};
-
-export default LoginPage;
-
-// import { Helmet, HelmetProvider } from 'react-helmet-async';
-
-// import { LoginForm } from '../components/LoginForm/LoginForm';
+}
+// import { useDispatch } from 'react-redux';
+// import { LoginForm } from 'components/LoginForm/LoginForm';
+// import { logIn } from 'redux/auth/auth-operations';
 
 // const LoginPage = () => {
+//   const dispatch = useDispatch();
+
+//   const onLogin = data => {
+//     dispatch(logIn(data));
+//   };
+
 //   return (
-//     <HelmetProvider>
-//       <div>
-//         <Helmet>
-//           <title>Login</title>
-//         </Helmet>
-//         <LoginForm />
-//       </div>
-//     </HelmetProvider>
+//     <>
+//       <LoginForm onData={onLogin} />
+//     </>
 //   );
 // };
+
 // export default LoginPage;

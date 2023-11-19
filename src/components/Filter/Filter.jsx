@@ -1,15 +1,40 @@
-import { FilterContainer, Field } from './Filter.styled';
+import { InputFilter } from './Filter.styled';
 
-export const Filter = ({ value, onChangeFilter }) => {
+import { useDispatch } from 'react-redux';
+
+import { changeFilterValue } from 'redux/FilterSlice';
+
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const handleChange = evt => {
+    const value = evt.currentTarget.value;
+    dispatch(changeFilterValue(value));
+  };
+
   return (
-    <FilterContainer>
-      Find contacts by name
-      <Field
+    <div>
+      <InputFilter
         type="text"
-        value={value}
-        onChange={onChangeFilter}
-        placeholder=" enter contact"
+        name="filter"
+        placeholder="Contacts filter"
+        onChange={handleChange}
       />
-    </FilterContainer>
+    </div>
   );
 };
+// import { FilterContainer, Field } from './Filter.styled';
+
+// export const Filter = ({ value, onChangeFilter }) => {
+//   return (
+//     <FilterContainer>
+//       Find contacts by name
+//       <Field
+//         type="text"
+//         value={value}
+//         onChange={onChangeFilter}
+//         placeholder=" enter contact"
+//       />
+//     </FilterContainer>
+//   );
+// };
