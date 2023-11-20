@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-// export const StyledForm = styled.form`
-//   display: block;
-//   border-radius: 5px;
-//   margin-right: auto;
-//   margin-left: auto;
-// `;
-
 export const Label = styled.label`
   display: flex;
   flex-direction: column;

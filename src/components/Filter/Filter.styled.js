@@ -3,17 +3,5 @@ import styled from 'styled-components';
 export const InputFilter = styled.input`
   margin-botoom: 10px;
   width: 350px;
+  border: 1px solid #d3d3d3;
 `;
-// import styled from 'styled-components';
-
-// export const FilterContainer = styled.label`
-//   display: flex;
-//   flex-direction: column;
-//   margin-bottom: 15px;
-// `;
-
-// export const Field = styled.input`
-//   border: 1px solid #d3d3d3;
-//   cursor: pointer;
-//   margin-top: 5px;
-// `;
