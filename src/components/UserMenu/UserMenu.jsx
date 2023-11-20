@@ -1,5 +1,27 @@
+// import { useAuth } from 'hook/useAuth';
+// import { Button, UserName, Wrapper } from './UserMenu.styled';
+// import { useDispatch } from 'react-redux';
+// import { logOut } from 'redux/auth/auth-operations';
+
+// export const UserMenu = () => {
+//   const dispatch = useDispatch();
+
+//   const { user } = useAuth();
+
+//   const handleLogout = () => dispatch(logOut());
+
+//   return (
+//     <Wrapper>
+//       <UserName>Welcome, {user.name}!</UserName>
+//       <Button type="button" onClick={handleLogout}>
+//         Logout
+//       </Button>
+//     </Wrapper>
+//   );
+// };
 import { useAuth } from 'hook/useAuth';
-import { Button, UserName, Wrapper } from './UserMenu.styled';
+import Button from '@mui/material/Button';
+import { UserName, Wrapper } from './UserMenu.styled';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/auth-operations';
 
@@ -12,9 +34,14 @@ export const UserMenu = () => {
 
   return (
     <Wrapper>
-      <UserName>Welcome, {user.name}!</UserName>
-      <Button type="button" onClick={handleLogout}>
-        Logout
+      <UserName>Hello, {user.name}!</UserName>
+      <Button
+        variant="contained"
+        size="small"
+        onClick={handleLogout}
+        type="button"
+      >
+        Log Out
       </Button>
     </Wrapper>
   );
