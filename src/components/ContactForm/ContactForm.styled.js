@@ -23,3 +23,16 @@ export const Input = styled.input`
   margin-botom: 10px;
   width: 360px;
 `;
+export const Button = styled.button`
+  background-color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px;
+
+  &:hover {
+    background-color: gray;
+    color: #fff;
+  }
+`;

@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 
 export const UserName = styled.p`
   font-weight: 700;
+  color: #1976d2;
 `;
 
 export const Button = styled.button`
@@ -18,7 +19,7 @@ export const Button = styled.button`
   border-radius: 5px;
   font-weight: 500;
   &:hover {
-    background-color: gray;
+    background-color: #1976d2;
     color: #fff;
   }
 `;

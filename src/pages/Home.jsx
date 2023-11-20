@@ -1,10 +1,3 @@
-// export default function Home() {
-//   return (
-//     <div>
-//       <h2>Welcome to the phonebook</h2>
-//     </div>
-//   );
-// }
 export default function Home() {
   return (
     <div className="hero-section" style={styles.container}>
@@ -27,15 +20,3 @@ const styles = {
     textAlign: 'center',
   },
 };
-
-// const HomePage = () => {
-//   return (
-//     <div className="hero-section" style={styles.container}>
-//       <h1 className="hero-title" style={styles.title}>
-//         PhoneBook{' '}
-//       </h1>
-//     </div>
-//   );
-// };
-
-// export default HomePage;

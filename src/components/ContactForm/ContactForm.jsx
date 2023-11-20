@@ -1,5 +1,4 @@
-import { Label, StyledForm } from './ContactForm.styled';
-import Button from '@mui/material/Button';
+import { Label, StyledForm, Button } from './ContactForm.styled';
 import { Formik, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
@@ -49,9 +48,7 @@ export const ContactForm = () => {
           Tel:
           <Field name="number" type="tel" />
         </Label>
-        <Button variant="contained" size="small" type="submit">
-          Add contact
-        </Button>
+        <Button type="submit">Add contact</Button>
         <Toaster />
       </StyledForm>
     </Formik>
